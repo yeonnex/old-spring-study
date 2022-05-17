@@ -87,5 +87,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .maxSessionsPreventsLogin(false) // 최대 가능 허용개수를 초과했을 떄 어떻게 할 것인가? true: 현재 사용자 인증 실패. false 는 이전 세션 만료.
                 .expiredUrl("/expired"); // 세션이 만료된 경우 이동할 페이지
 
+        /**
+         * 세션 고정 보호 (로그인 전, 후 세션 id 를 바꿔주는 것이 기본으로 설정되어있음. 보안상 매우 필요한 기능을 스프링 시큐리티가 편리하게 제공하고 있음.)
+         */
+        http.sessionManagement()
+                .sessionFixation().changeSessionId();
+
     }
 }
