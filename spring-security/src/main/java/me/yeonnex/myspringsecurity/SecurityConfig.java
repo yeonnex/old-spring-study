@@ -79,5 +79,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .alwaysRemember(true) // 리멤버미 기능이 활성화되지 않아도 항상 실행
                 .userDetailsService(userDetailsService);
 
+        /**
+         * 동시 세션 제어
+         */
+        http.sessionManagement() // 세션 관리 기능이 작동함
+                .maximumSessions(1) // 최대 가능 세션수. -1 은 무제한 로그인 세션 허용
+                .maxSessionsPreventsLogin(false) // 최대 가능 허용개수를 초과했을 떄 어떻게 할 것인가? true: 현재 사용자 인증 실패. false 는 이전 세션 만료.
+                .expiredUrl("/expired"); // 세션이 만료된 경우 이동할 페이지
+
     }
 }
