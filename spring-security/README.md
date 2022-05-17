@@ -7,4 +7,15 @@
    - 인증 성공 -> Remember-Me 쿠키 설정
    - 인증 실패 -> 쿠키가 존재하면 쿠키 무효화
    - 로그아웃 -> 쿠키가 존재하면 쿠키 무효화
+### RememberMe 인증필터: RememberMeAuthenticationFilter
+**최초 로그인시, remember-me 속성을 활성화하여 인증을 받으면** rememberme 쿠키를 서버로부터 받게 된다.
+이후 요청헤더에 rememberme 쿠키를 달고 요청을 보낸다면, 세션이 만료되거나, 시큐리티 컨텍스트의 Authentication 객체가 null 이어도 인증을
+유효하게 만드는 것이 바로 이 RememberMeAuthenticationFilter 이다.
+
+다음 두가지 조건에서 동작한다.
+1) Authentication 인증객체가 null 이고,
+2) 요청헤더에 rememberme 쿠키가 있을 때
+
+
+
 
