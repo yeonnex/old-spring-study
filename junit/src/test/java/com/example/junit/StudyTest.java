@@ -1,19 +1,22 @@
 package com.example.junit;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS) // 상태 공유. 모든 테스트에서 동일한 객체 사용.
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudyTest {
+    int value = 1;
     @Test
     @DisplayName("스터디 생성 ୧(๑•̀ᗝ•́)૭")
     @EnabledIfEnvironmentVariable(named = "MY_ENV", matches = "TEST_ENV") // 어노테이션으로 환경변수 조건 걸기
     @Tag("fast")
     @EnabledOnOs(OS.MAC)
+    @Order(3)
     void studyTest(){
         // 코드로 환경 변수 조건 걸기
 //        String my_env = System.getenv("MY_ENV");
@@ -24,14 +27,22 @@ class StudyTest {
         assertNotNull(study);
     }
 
+    /**
+     * junit 은 테스트 메소듣마다 테스트 인스턴스를 만든다.
+     * 테스트 간의 의존성을 없애기 위해 매 테스트마다 junit 은 새로은 객체를 만들어서 쓴다.
+     */
+    @Order(1)
     @FastTest
     void customTest(){
-
+        System.out.println(value++);
+        System.out.println(this); // 매 메서드 실행마다 다른 객체를 씀
     }
 
+    @Order(2)
     @SlowTest
     void customTest2(){
-
+        System.out.println(value++);
+        System.out.println(this); // 매 메서드 실행마다 다른 객체를 씀
     }
 
     @Test
