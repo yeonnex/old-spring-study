@@ -11,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class StudyTest {
     @Test
     @DisplayName("스터디 생성 ୧(๑•̀ᗝ•́)૭")
-    @EnabledIfEnvironmentVariable(named = "MY_ENV", matches = "TEST_ENV") // 어노테이션으로 환경변수 조건 걸기라
+    @EnabledIfEnvironmentVariable(named = "MY_ENV", matches = "TEST_ENV") // 어노테이션으로 환경변수 조건 걸기
+    @Tag("fast")
     @EnabledOnOs(OS.MAC)
     void studyTest(){
         // 코드로 환경 변수 조건 걸기
@@ -24,6 +25,7 @@ class StudyTest {
     }
 
     @Test
+    @Tag("slow")
     void studyTest2(){
         Study study = new Study();
         assertNotNull(study);
