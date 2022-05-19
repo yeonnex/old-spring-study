@@ -24,6 +24,16 @@ class StudyTest {
         assertNotNull(study);
     }
 
+    @FastTest
+    void customTest(){
+
+    }
+
+    @SlowTest
+    void customTest2(){
+
+    }
+
     @Test
     @Tag("slow")
     void studyTest2(){
