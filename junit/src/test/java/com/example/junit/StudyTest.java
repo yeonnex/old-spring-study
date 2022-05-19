@@ -1,13 +1,24 @@
 package com.example.junit;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class StudyTest {
     @Test
     @DisplayName("스터디 생성 ୧(๑•̀ᗝ•́)૭")
+    @EnabledIfEnvironmentVariable(named = "MY_ENV", matches = "TEST_ENV") // 어노테이션으로 환경변수 조건 걸기라
+    @EnabledOnOs(OS.MAC)
     void studyTest(){
+        // 코드로 환경 변수 조건 걸기
+//        String my_env = System.getenv("MY_ENV");
+//        System.out.println(my_env);
+//        assumeTrue("TEST_ENV".equals(my_env)); // false 를 반환하면 이후의 문장 실행되지 않음.
+        System.out.println("현재 환경변수 MY_ENV 는 TEST_ENV 이며, assumeTrue 가 true 를 반환하여 출력된 문장.");
         Study study = new Study();
         assertNotNull(study);
     }
